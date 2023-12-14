@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
@@ -22,9 +19,3 @@ func Execute() {
 		os.Exit(1)
 	}
 }
-
-// func init() {
-
-// 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-
-// }
