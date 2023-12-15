@@ -21,7 +21,7 @@ brews:
     repository:
       owner: root27
       name: homebrew-tools
-      token: "{{ .Env.BREW_TOKEN }}"
+      
     
       
 
