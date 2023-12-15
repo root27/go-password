@@ -14,6 +14,26 @@ go install github.com/root27/go-password@latest
 
 ---
 
+## Homebrew
+
+```bash
+
+brew install root27/tools/go-password
+
+```
+
+or
+
+```bash
+
+brew tap root27/tools
+
+brew install go-password
+
+```
+
+---
+
 ## Usage
 
 ```bash
