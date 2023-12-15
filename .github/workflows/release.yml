@@ -1,28 +1,37 @@
-name: Go Password
+# .github/workflows/release.yml
+name: goreleaser
 
-on: 
-    push:
-        tags:
-            - '*'
+on:
+  push:
+    # run only against tags
+    tags:
+      - "*"
+
+permissions:
+  contents: write
+  # packages: write
+  # issues: write
 
 jobs:
-
-    goreleaser: 
-        name: Go releaser build
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-              with:
-                  fetch-depth: 0
-            - name: Setup Go
-              uses: actions/setup-go@v2
-            
-            - name: Setup GoReleaser
-              uses: goreleaser/goreleaser-action@v2
-              with:
-                  distribution: goreleaser
-                  args: release --clean
-              env:
-                GITHUB_TOKEN: ${{ secrets.GO_GITHUB_TOKEN }}
-                BREW_TOKEN: ${{ secrets.BREW_TOKEN }}
+  goreleaser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: git fetch --force --tags
+      - uses: actions/setup-go@v4
+        with:
+          go-version: stable
+      # More assembly might be required: Docker logins, GPG, etc.
+      # It all depends on your needs.
+      - uses: goreleaser/goreleaser-action@v5
+        with:
+          # either 'goreleaser' (default) or 'goreleaser-pro':
+          distribution: goreleaser
+          version: latest
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BREW_TOKEN: ${{ secrets.BREW_TOKEN }}
             
